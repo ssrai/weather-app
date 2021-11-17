@@ -7,7 +7,7 @@ const forecast = (latitude, longitude, callback) => {
     "," +
     encodeURIComponent(longitude);
   // const url = "http://api.weatherstack.com/current?access_key=521b7ce82e20c98a8872cb4036b8703c&query=" + latitude + "," + longitude;
-  // console.log(url);  // Make a practice to validate the URL if it is getting curretly passsed when defining logic
+  // console.log(url); // Make a practice to validate the URL if it is getting curretly passsed when defining logic
 
   request({ url, json: true }, (error, { body }) => {
     if (error) {
@@ -17,12 +17,25 @@ const forecast = (latitude, longitude, callback) => {
     } else {
       callback(
         undefined,
-        body.current.weather_descriptions[0] +
-          ". It is currently " +
+        "Weather here is currently " +
+          body.current.weather_descriptions[0] +
+          "." +
+          "\n" +
+          "Temperature right now is " +
           body.current.temperature +
-          " degree out. It feels like " +
+          " degree." +
+          "\n" +
+          "It feels like " +
           body.current.feelslike +
-          " degrees  out."
+          " degree out." +
+          "\n" +
+          "Humidity here is " +
+          body.current.humidity +
+          "." +
+          "\n" +
+          "Wind speed is " +
+          body.current.wind_speed +
+          " m/s."
       );
     }
   });
